@@ -35,6 +35,9 @@ export default class Timer extends EventTarget {
 
   start() {
     if (this.#state === 'running') return;
+    if (this.#state === 'finished') {
+      this.#remaining = DURATIONS[this.#mode];
+    }
     this.#state = 'running';
     this.#endAt = Date.now() + this.#remaining;
     this.#startInterval();
