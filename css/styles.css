@@ -1,0 +1,176 @@
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #22c55e;
+  --accent-soft: rgba(34, 197, 94, 0.15);
+}
+
+body[data-mode="break"] {
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  flex: 1;
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+  padding: clamp(1rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 4vh, 2.5rem);
+}
+
+.app__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.modes {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background-color: var(--surface);
+}
+
+.modes__button {
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.modes__button[aria-pressed="true"] {
+  background-color: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.timer__display {
+  margin: 0;
+  font-size: clamp(4rem, 22vw, 8rem);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  transition: color 0.3s ease;
+}
+
+.timer__progress {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background-color: var(--surface);
+  overflow: hidden;
+}
+
+.timer__progress-bar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--accent);
+  transition: width 0.25s linear, background-color 0.3s ease;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.controls__button {
+  border: 1px solid var(--surface);
+  padding: 0.8rem 1.75rem;
+  border-radius: 999px;
+  background-color: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+.controls__button:hover {
+  filter: brightness(1.15);
+}
+
+.controls__button:active {
+  transform: scale(0.97);
+}
+
+.controls__button--primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.status {
+  min-height: 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.app__footer {
+  padding: 1rem;
+  text-align: center;
+}
+
+.counter {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+#cycle-count {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
