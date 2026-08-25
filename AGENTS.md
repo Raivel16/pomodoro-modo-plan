@@ -16,5 +16,5 @@ App Pomodoro en HTML5 + CSS3 + JavaScript Vanilla (ES Modules). Sin frameworks, 
 
 ## Convenciones de trabajo
 - Desarrollo incremental: el usuario aprueba un requerimiento a la vez; no implementar el siguiente sin indicación explícita.
-- Roadmap acordado: R1 esqueleto + temporizador 25/5 y R2 refinamiento de controles (hechos) → R3 notificaciones (Web Audio API sintetizada, sin archivos de audio) y visuales → R4 contador de pomodoros en memoria → R5 pulido responsive/accesibilidad.
+- Roadmap acordado: R1 esqueleto + temporizador 25/5, R2 refinamiento de controles y R3 notificaciones (hechos) → R4 contador de pomodoros en memoria → R5 pulido responsive/accesibilidad.
 - Placeholders ya presentes en el DOM para requisitos futuros: `#status-region` (zona `aria-live`, destinada a R3) y `#cycle-count` en el footer (destinado a R4).

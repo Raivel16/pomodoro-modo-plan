@@ -7,6 +7,7 @@ const els = {
   toggleButton: document.getElementById('btn-toggle'),
   resetButton: document.getElementById('btn-reset'),
   modeButtons: Array.from(document.querySelectorAll('[data-mode-button]')),
+  statusRegion: document.getElementById('status-region'),
 };
 
 function formatTime(ms) {
@@ -22,6 +23,36 @@ const TOGGLE_LABELS = {
   paused: ['Reanudar', 'Reanudar temporizador'],
   finished: ['Iniciar', 'Volver a iniciar el temporizador'],
 };
+
+let statusTimeoutId = null;
+let titleFlashIntervalId = null;
+
+export function announce(message) {
+  els.statusRegion.textContent = message;
+  clearTimeout(statusTimeoutId);
+  statusTimeoutId = setTimeout(() => {
+    els.statusRegion.textContent = '';
+  }, 6000);
+}
+
+function stopTitleFlash() {
+  if (titleFlashIntervalId !== null) {
+    clearInterval(titleFlashIntervalId);
+    titleFlashIntervalId = null;
+  }
+}
+
+export function startTitleFlash(mode) {
+  stopTitleFlash();
+  const messages = ['¡Ciclo completado!', `${LABELS[mode]} terminado`];
+  let index = 0;
+  const apply = () => {
+    document.title = messages[index % messages.length];
+    index += 1;
+  };
+  apply();
+  titleFlashIntervalId = setInterval(apply, 1200);
+}
 
 export function initUI({ onToggle, onReset, onModeChange }) {
   els.toggleButton.addEventListener('click', onToggle);
@@ -54,8 +85,11 @@ export function render(detail) {
     button.setAttribute('aria-pressed', String(button.dataset.modeButton === mode));
   });
 
-  document.title =
-    state === 'running' || state === 'paused'
-      ? `${time} · ${LABELS[mode]}`
-      : 'Pomodoro';
+  if (state !== 'finished') {
+    stopTitleFlash();
+    document.title =
+      state === 'running' || state === 'paused'
+        ? `${time} · ${LABELS[mode]}`
+        : 'Pomodoro';
+  }
 }
