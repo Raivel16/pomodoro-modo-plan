@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Temporizador Pomodoro con ciclos de trabajo y descanso.">
+  <meta name="theme-color" content="#0f172a">
   <title>Pomodoro</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -19,7 +20,7 @@
     </nav>
 
     <section class="timer" role="timer" aria-label="Tiempo restante del ciclo actual">
-      <p class="timer__display" id="time-display">25:00</p>
+      <time id="time-display" class="timer__display" datetime="PT25M">25:00</time>
       <div class="timer__progress" aria-hidden="true">
         <div class="timer__progress-bar" id="progress-bar"></div>
       </div>

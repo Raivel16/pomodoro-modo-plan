@@ -77,7 +77,7 @@ Semántica: landmarks (`header`, `main`, `footer`), `role="timer"`, `aria-live` 
 | R2 | Refinamiento de controles del temporizador | estados y UX de Iniciar/Pausar/Reiniciar | Hecho |
 | R3 | Notificaciones sonoras (Web Audio) y visuales al finalizar ciclo | `audio.js` + zona `#status-region` + parpadeo de título | Hecho |
 | R4 | Contador de pomodoros de la sesión | `session.js` + `#cycle-count` | Hecho |
-| R5 | Pulido responsive + accesibilidad final | ajustes CSS/ARIA | Pendiente |
+| R5 | Pulido responsive + accesibilidad final | ajustes CSS/ARIA | Hecho |
 
 ## Ejecución y verificación
 

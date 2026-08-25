@@ -18,12 +18,17 @@ body[data-mode="break"] {
 
 body {
   margin: 0;
+  min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background-color: var(--bg);
+  background:
+    radial-gradient(ellipse at 50% -10%, var(--accent-soft), transparent 55%),
+    var(--bg);
   color: var(--text);
+  transition: background-color 0.4s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .app {
@@ -58,12 +63,17 @@ body {
 .modes__button {
   border: none;
   padding: 0.6rem 1.25rem;
+  min-height: 44px;
   border-radius: 999px;
   background: transparent;
   color: var(--text-muted);
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.modes__button:hover {
+  color: var(--text);
 }
 
 .modes__button[aria-pressed="true"] {
@@ -128,18 +138,23 @@ body[data-state="finished"] .timer__display {
 
 .controls {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem;
 }
 
 .controls__button {
   border: 1px solid var(--surface);
   padding: 0.8rem 1.75rem;
+  min-height: 48px;
   border-radius: 999px;
   background-color: var(--surface);
   color: var(--text);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
   transition: transform 0.1s ease, filter 0.2s ease;
 }
 
@@ -166,6 +181,11 @@ body[data-state="finished"] .timer__display {
   min-height: 1.5rem;
   text-align: center;
   font-size: 1rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.status:empty {
   color: var(--text-muted);
 }
 
@@ -189,6 +209,29 @@ body[data-state="finished"] .timer__display {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+@media (max-height: 520px) {
+  .app {
+    gap: 1rem;
+    padding-block: 0.75rem;
+  }
+
+  .timer__display {
+    font-size: clamp(3rem, 14vh, 5rem);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .modes__button,
+  .controls__button,
+  .timer__progress {
+    border-color: var(--text-muted);
+  }
+
+  :focus-visible {
+    outline-width: 3px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
