@@ -1,6 +1,7 @@
 import Timer from './timer.js';
-import { initUI, render, announce, startTitleFlash } from './ui.js';
+import { initUI, render, announce, startTitleFlash, renderCycleCount } from './ui.js';
 import { playCompletionBell, unlockAudio } from './audio.js';
+import { recordPomodoro, getPomodoroCount } from './session.js';
 
 const timer = new Timer();
 
@@ -24,7 +25,12 @@ timer.addEventListener('complete', (event) => {
   playCompletionBell();
   announce(CYCLE_MESSAGES[event.detail.mode]);
   startTitleFlash(event.detail.mode);
+  if (event.detail.mode === 'work') {
+    renderCycleCount(recordPomodoro());
+  }
 });
+
+renderCycleCount(getPomodoroCount());
 
 render({
   mode: timer.mode,

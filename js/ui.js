@@ -8,6 +8,7 @@ const els = {
   resetButton: document.getElementById('btn-reset'),
   modeButtons: Array.from(document.querySelectorAll('[data-mode-button]')),
   statusRegion: document.getElementById('status-region'),
+  cycleCount: document.getElementById('cycle-count'),
 };
 
 function formatTime(ms) {
@@ -40,6 +41,10 @@ function stopTitleFlash() {
     clearInterval(titleFlashIntervalId);
     titleFlashIntervalId = null;
   }
+}
+
+export function renderCycleCount(count) {
+  els.cycleCount.textContent = String(count);
 }
 
 export function startTitleFlash(mode) {
