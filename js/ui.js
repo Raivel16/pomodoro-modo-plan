@@ -16,6 +16,13 @@ function formatTime(ms) {
   return `${minutes}:${seconds}`;
 }
 
+const TOGGLE_LABELS = {
+  idle: ['Iniciar', 'Iniciar temporizador'],
+  running: ['Pausar', 'Pausar temporizador'],
+  paused: ['Reanudar', 'Reanudar temporizador'],
+  finished: ['Iniciar', 'Volver a iniciar el temporizador'],
+};
+
 export function initUI({ onToggle, onReset, onModeChange }) {
   els.toggleButton.addEventListener('click', onToggle);
   els.resetButton.addEventListener('click', onReset);
@@ -38,11 +45,10 @@ export function render(detail) {
   const elapsedPercent = ((duration - remaining) / duration) * 100;
   els.progressBar.style.width = `${elapsedPercent}%`;
 
-  els.toggleButton.textContent = state === 'running' ? 'Pausar' : 'Iniciar';
-  els.toggleButton.setAttribute(
-    'aria-label',
-    state === 'running' ? 'Pausar temporizador' : 'Iniciar temporizador'
-  );
+  const [toggleLabel, toggleAriaLabel] = TOGGLE_LABELS[state];
+  els.toggleButton.textContent = toggleLabel;
+  els.toggleButton.setAttribute('aria-label', toggleAriaLabel);
+  els.resetButton.disabled = state === 'idle';
 
   els.modeButtons.forEach((button) => {
     button.setAttribute('aria-pressed', String(button.dataset.modeButton === mode));

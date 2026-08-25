@@ -107,6 +107,25 @@ body {
   transition: width 0.25s linear, background-color 0.3s ease;
 }
 
+body[data-state="paused"] .timer__display {
+  opacity: 0.55;
+}
+
+body[data-state="finished"] .timer__display {
+  animation: pulse-finished 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-finished {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.04);
+    opacity: 0.7;
+  }
+}
+
 .controls {
   display: flex;
   gap: 0.75rem;
@@ -124,12 +143,17 @@ body {
   transition: transform 0.1s ease, filter 0.2s ease;
 }
 
-.controls__button:hover {
+.controls__button:hover:not(:disabled) {
   filter: brightness(1.15);
 }
 
-.controls__button:active {
+.controls__button:active:not(:disabled) {
   transform: scale(0.97);
+}
+
+.controls__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .controls__button--primary {
